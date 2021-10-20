@@ -1,0 +1,43 @@
+﻿<h1>PaymentsMode</h1>
+<style>
+    .br {
+        background-size: auto;
+        background-repeat: no-repeat;
+        min-width: 100%;
+        margin-top: -40px;
+        position: absolute;
+        left: -100%;
+        right: -100%;
+        margin: auto;
+        top: 10%;
+    }
+
+    #on {
+        position: absolute;
+        top: 40%;
+        font-size: 30px;
+        left: 50%
+    }
+
+    #cod {
+        position: absolute;
+        top: 40%;
+        font-size: 30px;
+        left: 80%;
+    }
+
+    body {
+        background-color: #2b6777;
+    }
+
+    h1 {
+        color: #f2f2f2;
+    }
+</style>
+<img src="~/assets/jjj.jpg" height="450" width="500" />
+<div class="container">
+    <a input type="submit" id="on" asp-controller="OnlinePayment" asp-action="Payment" class="btn btn-success">Payment By Online</a>
+    <a input type="submit" id="cod" asp-controller="Books" asp-action="Thanks" class="btn btn-success">Cash on Delivery</a>
+
+</div>
+

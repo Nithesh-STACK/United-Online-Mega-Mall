@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    .tnx {
+        background-size: auto;
+        background-repeat: no-repeat;
+        min-width: 100%;
+        position: absolute;
+        left: -100%;
+        right: -100%;
+        margin: auto;
+        top: 10%;
+    }
+
+    #fr {
+        position: absolute;
+        top: 15%;
+        color: white;
+        left: 51%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #se {
+        position: absolute;
+        top: 38%;
+        color: white;
+        left: 57%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+   #dc {
+        position:absolute;
+        left: 68%;
+    }
+
+    #th {
+        position: absolute;
+        top: 40%;
+        color: white;
+        left: 43%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn-success {
+        top: 70%;
+        font-family: 'Times New Roman', Times, serif;
+        position: absolute;
+        left: 40%;
+    }
+    body{
+        background-color:#46344E
+    }
+</style>
+<div class="container">
+    <img src="~/assets/tgf.jpeg" height="450" width="500" />
+    <div class="text-center">
+        <h6  id="fr"class="display-4">Thank You For Using our Application</h6>
+        <h6 id="se" class="display-4">Have a Good Day</h6>
+        <a id="dc"class="btn btn-success" asp-controller="Books" asp-action="Indes">Back To Categories</a>
+
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BookAPI.Models.Pro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+  
+    body {
+        background-color: dimgray
+    }
+
+    
+</style>
+<a class="btn btn-light" asp-action="ProductItems" asp-controller="Cart">My Cart</a>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productprice)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ProductImage)*@
+                    <img src="@Url.Content(item.ProductImage)" height="200" width="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Productname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Productprice) Rs
+                </td>
+
+                <td>
+                    <button class="btn btn-success"> <a asp-controller="Books" asp-action="ShipmentDet" asp-route-id="@item.Productid">Buy Product</a> </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-info"> <a asp-controller="Product" asp-action="DetailItems" asp-route-id="@item.Productid">Preview Product</a></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="AddCart" class="btn btn-warning" onclick="location.href='@Url.Action("ProductCart", "Cart",item)'" />
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

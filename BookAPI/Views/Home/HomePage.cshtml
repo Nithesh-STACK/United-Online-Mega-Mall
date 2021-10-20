@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "HomePage";
+    Layout = "HeaderLayout";
+}
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<style>
+    html, body {
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .bg {
+        background-image: url('~/wwwroot/images');
+        background-size: auto;
+        background-repeat: no-repeat;
+        min-width: 100%;
+        margin-top: -40px;
+        position: absolute;
+        left: -100%;
+        right: -100%;
+        margin: auto;
+        top: 9%;
+    }
+
+    #fr {
+        position: absolute;
+        top: 15%;
+        color: white;
+        left: 55%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #se {
+        position: absolute;
+        top: 27%;
+        color: white;
+        left: 62%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #th {
+        position: absolute;
+        top: 40%;
+        color: white;
+        left: 43%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn-outline-light {
+        position: absolute;
+        top: 70%;
+        left: 51%;
+        font-size: 20px;
+    }
+
+    #logi {
+        position: absolute;
+        top: 67.5%;
+        font-size: 60px;
+        left: 55%;
+    }
+
+    #register {
+        position: absolute;
+        top: 67.5%;
+        font-size: 60px;
+        left: 65%;
+    }
+    h6 {
+        position: absolute;
+        top: 50%;
+        color: white;
+        left:60%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #reg {
+        position: absolute;
+        top: 70%;
+        font-size: 60px;
+        left: 80%;
+    }
+</style>
+
+<div class="container">
+    <img class="bg" src="/assets/pgs.jpg" />
+    <div class="text-center">
+        <h6 id="fr"class="display-4">Welcome</h6>
+        <h6 id="se" class="display-4">To</h6>
+        <h6 id="th"class="display-4">United Online Mega Mall</h6>
+
+        @{
+            ViewBag.Data = @HttpContextAccessor.HttpContext.Session.GetString("Username");
+        }
+
+        @if (ViewBag.Data != null)
+        {
+            <h6 class="display-4">@ViewBag.Data !!</h6>
+
+            <a id="logi" asp-controller="Books" asp-action="Indes"><button class="btn-outline-light btn-dark ">Back To Categories</button></a>
+            <a id="reg" asp-controller="Books" asp-action="Logout"><button class="btn-outline-light btn-dark">Logout</button></a>
+
+        }
+        else
+        {
+            <a id="logi" asp-controller="Books" asp-action="Login"><button class="btn-outline-light btn-dark ">Login</button></a>
+            <a id="register" asp-controller="Books" asp-action="RegisterUsers"><button class="btn-outline-light btn-dark ">Register</button></a>
+
+        }
+    </div>
+</div>
+
+
+
+
+
+
+

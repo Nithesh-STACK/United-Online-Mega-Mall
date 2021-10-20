@@ -1,0 +1,74 @@
+﻿@*@model BookAPI.Models.Book
+
+@{
+    ViewData["Title"] = "AddCart";
+}
+<style>
+    .bk {
+        background-size: auto;
+        background-repeat: no-repeat;
+        min-width: 100%;
+        margin-top: -40px;
+        position: absolute;
+        left: -100%;
+        right: -100%;
+        margin: auto;
+        top: 1%;
+        bottom:-10%         
+    }
+    body{
+        background-color:aquamarine;
+    }
+</style>
+<hr />
+<div class="container">
+    <img class="bk" src="~/images/jj.jpg" />
+<div class="row">
+    <div class="col-md-4">
+        <h5 style="color:azure"> Are You Sure want to add item to this Cart?</h5>
+        <form asp-action="AddCart">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" style="color:azure" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" style="color:azure" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" style="color:azure" class="control-label"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" style="color:azure" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo"style="color:azure"  class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlotDescription" style="color:azure" class="control-label"></label>
+                <input asp-for="PlotDescription" class="form-control" />
+                <span asp-validation-for="PlotDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add To Cart" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@

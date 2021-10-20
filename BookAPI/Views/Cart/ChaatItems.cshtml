@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BookAPI.Models.ChaatsCart>
+
+@{
+    ViewData["Title"] = "ChaatItems";
+}
+<style>
+        .table {
+        background-color:#0072B5;
+    }
+
+    body {
+        background-color: RGB(152, 180, 212);
+    }
+
+
+</style>
+<h1>Chaat Cart Items</h1>
+
+
+<table class="table">
+    <a class="btn btn-secondary" asp-action="Chaat" asp-controller="Chats">Back to Shopping</a>
+
+    <thead>
+        <tr>
+
+            <th>
+            </th>
+            <th>
+                Chaat Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <img src="@Url.Content(item.Cimage)" height="200" width="200" />
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cname)
+
+            </td>
+            <td>
+                                @Html.DisplayFor(modelItem => item.Cprice) Rs
+
+            </td>
+            <td>
+            </td>
+
+           
+            <td>
+                <button class="btn btn-success"> <a asp-action="ShipmentDet" asp-controller="Books" asp-route-id="@item.Cid">Buy Chaat</a></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-danger"> <a asp-controller="Cart" asp-action="DeleteCarts" asp-route-id="@item.Cid">Remove from Cart</a> </button>
+
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

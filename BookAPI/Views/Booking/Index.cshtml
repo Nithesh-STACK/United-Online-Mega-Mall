@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BookingClient.Models.APIClients>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1 style="color:white">Movie Category </h1>
+<style>
+   
+    body {
+        background-color: dimgray;
+    }
+
+
+</style>
+
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MoviePoster)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.MovieDescription)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.MoviePoster)*@
+                <img src="@Url.Content(item.MoviePoster)" height="200" width="200" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)Rs
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieDescription)
+            </td>
+
+            <td>
+                <a class="btn btn-warning" asp-action="Payment" asp-controller="OnlinePayment">Book Ticket</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

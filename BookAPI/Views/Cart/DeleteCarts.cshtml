@@ -1,0 +1,55 @@
+﻿@model BookAPI.Models.ChaatsCart
+
+@{
+    ViewData["Title"] = "DeleteCarts";
+}
+<style>
+
+
+    body {
+        background-color: palevioletred;
+    }
+
+    .row {
+        background-color: ghostwhite;
+    }
+</style>
+<h1>DeleteChaatCart</h1>
+
+@*<h3>Are you sure you want to remove this from cart?</h3>
+<div>
+    <h4>ChaatsCart</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cimage)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Url.Content(Model.Cimage)" height="200" width="200" />
+
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cprice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cprice)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteCarts">
+        <input type="submit" value="Remove"  class="btn btn-danger" /> |*@
+        @*<a asp-action="ChaatItems" asp-controller="Cart">Back to Cart</a>
+    </form>
+</div>*@

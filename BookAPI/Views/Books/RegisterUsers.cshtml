@@ -1,0 +1,94 @@
+﻿@model BookAPI.Models.Login
+
+@{
+    ViewData["Title"] = "RegisterUsers";
+    Layout = "HeaderLayout";
+}
+
+<style>
+    .reg {
+        background-image: url('~/wwwroot/images/bv.jpg');
+        background-size: auto;
+        background-repeat: no-repeat;
+        min-width: 100%;
+        margin-top: -40px;
+        position: absolute;
+        left: -100%;
+        right: -100%;
+        margin: auto;
+        top: 9%;
+    }
+    form {
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        /*        text-align: center;
+*/ padding: 45px;
+        background: #FFFFFF;
+    }
+
+        form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+    .btn {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background-color :#008CBA;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+</style>
+<hr />
+<div class="container">
+    <img class="reg" src="~/assets/bv.jpg" />
+
+    <div class="row">
+        <div class="col-md-4">
+            <h1 style="color:aliceblue">Registration</h1>
+
+            <form asp-action="RegisterUsers">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Enter new User name:</label>
+                    <input asp-for="LoginId" class="form-control" placeholder="UserName" />
+                    <span asp-validation-for="LoginId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Enter new Password:</label>
+                    <input asp-for="password" class="form-control" type="password" placeholder="Password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

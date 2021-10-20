@@ -1,0 +1,45 @@
+﻿@model BookAPI.Models.Chaat
+
+@{
+    ViewData["Title"] = "DetailItems";
+}
+<style>
+    .row {
+        background-color: mintcream;
+    }
+
+    body {
+        background-color: lightgreen;
+    }
+</style>
+<h1>Detail of the Chaat Items</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dd class="col-sm-10">
+            <img src="@Url.Content(Model.Cimage)" height="180" width="200">
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cname)
+        </dd>
+        <dt class="col-sm-2">
+
+        </dt>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cprice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cprice) Rs
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-controller="Books" asp-action="ShipmentDet">Buy</a>
+    <a class="btn btn-danger" asp-controller="Chats" asp-action="Chaat">Back To Shopping</a>
+</div>

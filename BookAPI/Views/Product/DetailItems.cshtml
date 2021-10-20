@@ -1,0 +1,45 @@
+﻿@model BookAPI.Models.Pro
+
+@{
+    ViewData["Title"] = "DetailItems";
+}
+<style>
+    .row {
+        background-color: mintcream;
+    }
+
+    body {
+        background-color: lightgreen;
+    }
+</style>
+<h1>Detail of the Product</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+     
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Productname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Productname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Productprice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Productprice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Url.Content(Model.ProductImage)" height="200" width="200" />
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-controller="Books" asp-action="ShipmentDet">Buy</a>
+    <a class="btn btn-danger" asp-controller="Product" asp-action="Index">Back To Shopping</a>
+</div>

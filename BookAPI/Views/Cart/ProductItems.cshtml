@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BookAPI.Models.ProductsCart>
+
+@{
+    ViewData["Title"] = "ProductItems";
+}
+<style>
+    .table {
+        background-color: #0072B5;
+    }
+
+    body {
+        background-color: RGB(152, 180, 212);
+    }
+
+</style>
+
+<h1>ProductItems</h1>
+
+<table class="table">
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Product">Back to Shopping</a>
+
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productname)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Productprice)
+            </th>
+            <th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.ProductImage)" height="200" width="200" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Productname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Productprice)
+                </td>
+
+                <td>
+                   <button class="btn btn-success"> <a asp-action="ShipmentDet" asp-controller="Books" asp-route-id="@item.Productid">Buy Product</a></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-danger"> <a asp-controller="Cart" asp-action="DeleteProCart" asp-route-id="@item.Productid">Remove from Cart</a> </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

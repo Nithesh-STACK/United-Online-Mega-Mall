@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BookAPI.Models.AddCart>
+
+@{
+    ViewData["Title"] = "CartItems";
+}
+
+<h1>CartItems</h1>
+<style>
+    .table {
+        background-color: #0072B5;
+    }
+
+    body {
+        background-color: RGB(152, 180, 212);
+    }
+
+  
+</style>
+
+
+<table class="table">
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Books">Back to Shopping</a>
+    <thead>
+        <tr>
+            <th>
+              
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlotDescription)
+
+            </th>
+            <th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.Photo)" height="200" width="200" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlotDescription)
+                </td>
+                <td>
+                    <button class="btn btn-success"> <a asp-action="ShipmentDet" asp-controller="Books" asp-route-id="@item.Id">Buy Book</a></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-danger"> <a asp-controller="Cart" asp-action="DeleteCart" asp-route-id="@item.Id">Remove from Cart</a> </button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

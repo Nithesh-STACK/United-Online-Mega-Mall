@@ -1,0 +1,73 @@
+﻿@model IEnumerable<BookAPI.Models.Chaat>
+
+@{
+    ViewData["Title"] = "Chaat";
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<style>
+   
+
+    body {
+        background-color: dimgrey;
+    }
+   
+    h1 {
+        color: white;
+    }
+</style>
+<body>
+    <div class="container">
+
+        <h1>Chaat and Snacks</h1>
+
+        <a class="btn btn-light" asp-action="ChaatItems" asp-controller="Cart">My Cart</a>
+
+        <table class="table table-dark table-hover blax">
+
+            <thead>
+
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        Chaat Item
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cprice)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@Url.Content(item.Cimage)" height="200" width="200" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cname)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cprice) Rs
+                        </td>
+                        <td>
+                            <button class="btn btn-success"> <a asp-action="ShipmentDet" asp-controller="Books" asp-route-id="@item.Cid">Buy Food</a> </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                     
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" value="AddCart" class="btn btn-warning" onclick="location.href='@Url.Action("ChaatsCart", "Cart",item)'" />
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>

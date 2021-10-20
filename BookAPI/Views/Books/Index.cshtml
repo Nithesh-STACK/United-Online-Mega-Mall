@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BookAPI.Models.Book>
+@{
+    ViewData["Title"] = "Books";
+}
+
+    <style>
+
+
+        body {
+            background-color: dimgray;
+        }
+        
+    </style>
+    <h1 style="color:aliceblue">Books By Categories</h1>
+    <div class="container">
+        <a class="btn btn-light" asp-action="CartItems" asp-controller="Cart">My Cart</a>
+        <table class="table table-dark table-hover">
+            <thead>
+                
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PlotDescription)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <img src="@Url.Content(item.Photo)" height="200" width="200" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)Rs
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlotDescription)
+                    </td>
+
+                    <td>
+                    <td>
+                        <button class="btn btn-success"> <a asp-action="ShipmentDet" asp-route-id="@item.Id">Buy Book</a> </button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-info"> <a asp-action="DetailItems" asp-route-id="@item.Id">Preview Book</a></button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;                   
+                        <input type="button" value="AddCart" class="btn btn-warning" onclick="location.href='@Url.Action("AddCart", "Cart",item)'" />
+
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        </div>
