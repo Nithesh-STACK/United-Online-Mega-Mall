@@ -18,34 +18,43 @@ namespace ProductClient.Controllers
 
         public async Task<ActionResult> Index()
         {
-            _log4net.Info("user is shopping products");
-
-            List<Pro> ProductInfo = new List<Pro>();
-
-            using (var client = new HttpClient())
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
             {
-                //Passing service base url  
-               // client.BaseAddress = new Uri(Baseurl);
+                return RedirectToAction("Login", "Books");
 
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            else
+            {
+                _log4net.Info("user is shopping products");
 
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("https://localhost:44387/api/ProductsBooking/");
+                List<Pro> ProductInfo = new List<Pro>();
 
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    //Storing the response details recieved from web api   
-                    var ProResponse = Res.Content.ReadAsStringAsync().Result;
+                    //Passing service base url  
+                    // client.BaseAddress = new Uri(Baseurl);
 
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    ProductInfo = JsonConvert.DeserializeObject<List<Pro>>(ProResponse);
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    HttpResponseMessage Res = await client.GetAsync("https://localhost:44387/api/ProductsBooking/");
+
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var ProResponse = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        ProductInfo = JsonConvert.DeserializeObject<List<Pro>>(ProResponse);
+
+                    }
+                    //returning the employee list to view  
+                    return View(ProductInfo);
                 }
-                //returning the employee list to view  
-                return View(ProductInfo);
             }
 
         }

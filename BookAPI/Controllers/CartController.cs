@@ -19,36 +19,44 @@ namespace BookAPI.Controllers
 
         public async Task<ActionResult> CartItems()
         {
-            _log4net.Info("user is entering cart items of books");
-
             string Token = HttpContext.Request.Cookies["Token"];
-
-            List<AddCart> cart = new List<AddCart>();
-
-            using (var client = new HttpClient())
+            if (string.IsNullOrEmpty(Token))
             {
-                //Passing service base url  
-                client.BaseAddress = new Uri(Baseurl);
+                return RedirectToAction("Login", "Books");
 
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            else
+            {
+                _log4net.Info("user is entering cart items of books");
 
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("https://localhost:44344/api/Cart/");
 
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
+                List<AddCart> cart = new List<AddCart>();
+
+                using (var client = new HttpClient())
                 {
-                    //Storing the response details recieved from web api   
-                    var CartResponse = Res.Content.ReadAsStringAsync().Result;
+                    //Passing service base url  
+                    client.BaseAddress = new Uri(Baseurl);
 
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    cart = JsonConvert.DeserializeObject<List<AddCart>>(CartResponse);
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    HttpResponseMessage Res = await client.GetAsync("https://localhost:44344/api/Cart/");
+
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var CartResponse = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        cart = JsonConvert.DeserializeObject<List<AddCart>>(CartResponse);
+
+                    }
+                    //returning the employee list to view  
+                    return View(cart);
                 }
-                //returning the employee list to view  
-                return View(cart);
             }
         }
         //[HttpGet]

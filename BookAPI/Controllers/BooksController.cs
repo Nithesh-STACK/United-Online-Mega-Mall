@@ -308,7 +308,15 @@ string Baseurl = "https://localhost:44392/";
         [HttpGet]
         public ActionResult ShipmentDet()
         {
-             return View();
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
+            {
+                return View("Login");
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpPost]
         public async Task<ActionResult> ShipmentDet(ShipmentDetail e)
@@ -330,15 +338,31 @@ string Baseurl = "https://localhost:44392/";
         }
         public IActionResult PaymentsMode()
         {
-            _log4net.Info("User is entering payment mode");
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
+            {
+                return View("Login");
+            }
+            else
+            {
+                _log4net.Info("User is entering payment mode");
 
-            return View();
+                return View();
+            }
         }
         public IActionResult Thanks()
         {
-            _log4net.Info("User is entering thank you page");
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
+            {
+                return View("Login");
+            }
+            else
+            {
+                _log4net.Info("User is entering thank you page");
 
-            return View();
+                return View();
+            }
         }
 
     }

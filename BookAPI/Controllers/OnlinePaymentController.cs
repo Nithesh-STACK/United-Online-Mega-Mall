@@ -17,7 +17,16 @@ namespace BookAPI.Controllers
         [HttpGet]
         public ActionResult Payment()
         {
-            return View();
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
+            {
+                return RedirectToAction("Login", "Books");
+
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpPost]
         public async Task<ActionResult> Payment(PaymentDetail e)

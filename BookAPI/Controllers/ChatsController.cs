@@ -19,34 +19,43 @@ namespace BookAPI.Controllers
 
         public async Task<ActionResult> Chaat()
         {
-            _log4net.Info("user is shopping chaat items");
-
-            List<Chaat> Info = new List<Chaat>();
-
-            using (var client = new HttpClient())
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
             {
-                //Passing service base url  
-                // client.BaseAddress = new Uri(Baseurl);
+                return RedirectToAction("Login", "Books");
 
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            else
+            {
+                _log4net.Info("user is shopping chaat items");
 
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("https://localhost:44391/api/Menu/");
+                List<Chaat> Info = new List<Chaat>();
 
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    //Storing the response details recieved from web api   
-                    var Response = Res.Content.ReadAsStringAsync().Result;
+                    //Passing service base url  
+                    // client.BaseAddress = new Uri(Baseurl);
 
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    Info = JsonConvert.DeserializeObject<List<Chaat>>(Response);
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    HttpResponseMessage Res = await client.GetAsync("https://localhost:44391/api/Menu/");
+
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var Response = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        Info = JsonConvert.DeserializeObject<List<Chaat>>(Response);
+
+                    }
+                    //returning the employee list to view  
+                    return View(Info);
                 }
-                //returning the employee list to view  
-                return View(Info);
             }
         }
 

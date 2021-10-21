@@ -18,34 +18,42 @@ namespace BookingClient.Controllers
         string Baseurl = "https://localhost:44303/";
         public async Task<ActionResult> Index()
         {
-            _log4net.Info("Movies category are invoked");
-
-            List<APIClients> MovieInfo = new List<APIClients>();
-
-            using (var client = new HttpClient())
+            string Token = HttpContext.Request.Cookies["Token"];
+            if (string.IsNullOrEmpty(Token))
             {
-                //Passing service base url  
-                client.BaseAddress = new Uri(Baseurl);
+                return RedirectToAction("Login","Books");
+            }
+            else
+            {
+                _log4net.Info("Movies category are invoked");
 
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                List<APIClients> MovieInfo = new List<APIClients>();
 
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("https://localhost:44303/api/Booking/");
-
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    //Storing the response details recieved from web api   
-                    var APIClientResponse = Res.Content.ReadAsStringAsync().Result;
+                    //Passing service base url  
+                    client.BaseAddress = new Uri(Baseurl);
 
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    MovieInfo = JsonConvert.DeserializeObject<List<APIClients>>(APIClientResponse);
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    HttpResponseMessage Res = await client.GetAsync("https://localhost:44303/api/Booking/");
+
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var APIClientResponse = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        MovieInfo = JsonConvert.DeserializeObject<List<APIClients>>(APIClientResponse);
+
+                    }
+                    //returning the employee list to view  
+                    return View(MovieInfo);
                 }
-                //returning the employee list to view  
-                return View(MovieInfo);
             }
         }
         public ActionResult Create()
