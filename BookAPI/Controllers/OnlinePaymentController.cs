@@ -22,7 +22,7 @@ namespace BookAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Payment(PaymentDetail e)
         {
-            _log4net.Info(" Product payment is" + e + "Suceessfull");
+            _log4net.Info(" Product payment of" + e.CardHolderName + "Suceessfull");
 
             PaymentDetail Emplobj = new PaymentDetail();
             using (var httpClient = new HttpClient())

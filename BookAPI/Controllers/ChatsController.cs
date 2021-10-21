@@ -19,6 +19,8 @@ namespace BookAPI.Controllers
 
         public async Task<ActionResult> Chaat()
         {
+            _log4net.Info("user is shopping chaat items");
+
             List<Chaat> Info = new List<Chaat>();
 
             using (var client = new HttpClient())
@@ -122,6 +124,7 @@ namespace BookAPI.Controllers
         public async Task<ActionResult> DetailItems(int id)
         {
             Chaat e = new Chaat();
+
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync("https://localhost:44391/api/Menu/" + id))

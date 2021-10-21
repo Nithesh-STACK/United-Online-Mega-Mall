@@ -18,6 +18,8 @@ namespace BookingClient.Controllers
         string Baseurl = "https://localhost:44303/";
         public async Task<ActionResult> Index()
         {
+            _log4net.Info("Movies category are invoked");
+
             List<APIClients> MovieInfo = new List<APIClients>();
 
             using (var client = new HttpClient())

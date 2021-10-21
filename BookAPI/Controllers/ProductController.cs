@@ -18,6 +18,8 @@ namespace ProductClient.Controllers
 
         public async Task<ActionResult> Index()
         {
+            _log4net.Info("user is shopping products");
+
             List<Pro> ProductInfo = new List<Pro>();
 
             using (var client = new HttpClient())
@@ -50,6 +52,8 @@ namespace ProductClient.Controllers
         public async Task<ActionResult> DetailItems(int id)
         {
             Pro e = new Pro();
+            _log4net.Info("user is invoking details of "+e.Productname);
+
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync("https://localhost:44387/api/ProductsBooking/" + id))

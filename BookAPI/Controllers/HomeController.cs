@@ -22,11 +22,15 @@ namespace BookAPI.Controllers
 
         public IActionResult HomePage()
         {
+            _log4net.Info("user is entering home page");
+
             return View();
         }
 
         public IActionResult Privacy()
         {
+            _log4net.Info("user is entering privacy page");
+
             return View();
         }
 

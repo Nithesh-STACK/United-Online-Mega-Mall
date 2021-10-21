@@ -19,6 +19,8 @@ namespace BookAPI.Controllers
 
         public async Task<ActionResult> CartItems()
         {
+            _log4net.Info("user is entering cart items of books");
+
             string Token = HttpContext.Request.Cookies["Token"];
 
             List<AddCart> cart = new List<AddCart>();
@@ -68,6 +70,8 @@ namespace BookAPI.Controllers
         //[HttpPost]
         public async Task<ActionResult> AddCart(Book e)
         {
+            _log4net.Info("user is adding" +e.Name+"to cart");
+
             Book Bookobj = new Book();
             AddCart crt = new AddCart();
             crt.Id = e.Id;
@@ -111,6 +115,8 @@ namespace BookAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> DeleteCart(AddCart e)
         {
+            _log4net.Info(e.Name + "removed from cart");
+
             int Bookid = e.Id;
             using (var httpClient = new HttpClient())
             {
@@ -139,6 +145,8 @@ namespace BookAPI.Controllers
         //[HttpPost]
         public async Task<ActionResult> ProductCart(ProductsCart e)
         {
+            _log4net.Info("user is adding "+e.Productname+"items of product");
+
             Pro Bookobj = new Pro();
             ProductsCart pr = new ProductsCart();
             pr.Productid = e.Productid;
@@ -192,8 +200,11 @@ namespace BookAPI.Controllers
         //[HttpGet]
         public async Task<ActionResult> DeleteProCart(int id)
         {
+
             ProductsCart e = new ProductsCart();
+
             e.Productid = id;
+            _log4net.Info("user is "+e.Productname+" is deleted from cart");
 
             using (var httpClient = new HttpClient())
             {
@@ -239,6 +250,8 @@ namespace BookAPI.Controllers
         //[HttpPost]
         public async Task<ActionResult> ChaatsCart(Chaat e)
         {
+            _log4net.Info("user is adding"+e.Cname+" item of chaat");
+
             Chaat Bookobj = new Chaat();
             ChaatsCart car = new ChaatsCart();
             car.Cid = e.Cid;
@@ -259,6 +272,8 @@ namespace BookAPI.Controllers
         }
         public async Task<ActionResult> ChaatItems()
         {
+            _log4net.Info("user is shopping item of chaat");
+
             string Token = HttpContext.Request.Cookies["Token"];
 
             List<ChaatsCart> cart = new List<ChaatsCart>();
@@ -294,6 +309,7 @@ namespace BookAPI.Controllers
         {
             ChaatsCart b = new ChaatsCart();
             b.Cid = id;
+            _log4net.Info("user is deleting" + b.Cname + " item of chaat");
 
             using (var httpClient = new HttpClient())
             {

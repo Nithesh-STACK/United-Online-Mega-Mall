@@ -48,7 +48,7 @@ namespace BookAPI.Controllers
         [HttpPost]
         public ActionResult Login(MemberLogin obj)
         {
-            _log4net.Info("User" + obj + " is Logging in");
+            _log4net.Info("User" + obj.Name + " is Logging in");
 
             string TokenForLogin;
             string data = JsonConvert.SerializeObject(obj);
@@ -87,6 +87,7 @@ namespace BookAPI.Controllers
         }
         public ActionResult Indes()
         {
+            _log4net.Info("User is Entering in to categories page");
 
             string Token = HttpContext.Request.Cookies["Token"];
             if (string.IsNullOrEmpty(Token))
@@ -122,12 +123,13 @@ namespace BookAPI.Controllers
         [HttpGet]
         public ActionResult RegisterUsers()
         {
+
             return View();
         }
         [HttpPost]
         public async Task<ActionResult> RegisterUsers(Login e)
         {
-            _log4net.Info("New User is" + e + "Registering");
+            _log4net.Info("New User is" + e.LoginId + "Registering");
 
             Login obj = new Login();
             using (var httpClient = new HttpClient())
@@ -147,6 +149,9 @@ namespace BookAPI.Controllers
 string Baseurl = "https://localhost:44392/";
         public async Task<ActionResult> Index()
         {
+            _log4net.Info("User is Shoppiing Books");
+
+
             string Token = HttpContext.Request.Cookies["Token"];
             if (string.IsNullOrEmpty(Token))
             {
@@ -284,9 +289,10 @@ string Baseurl = "https://localhost:44392/";
         
         public async Task<ActionResult> DetailItems(int id)
         {
-            _log4net.Info("Details " + id + " is invoked");
 
             Book e = new Book();
+            _log4net.Info("Details of book " + e.Name + " is invoked");
+
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync("https://localhost:44392/api/Books/" + id))
@@ -307,7 +313,7 @@ string Baseurl = "https://localhost:44392/";
         [HttpPost]
         public async Task<ActionResult> ShipmentDet(ShipmentDetail e)
         {
-            _log4net.Info(" Product is" + e + "Shipped");
+            _log4net.Info("User " + e.BuyersName + "Product Shipped");
 
             ShipmentDetail obj = new ShipmentDetail();
             using (var httpClient = new HttpClient())
@@ -324,10 +330,14 @@ string Baseurl = "https://localhost:44392/";
         }
         public IActionResult PaymentsMode()
         {
+            _log4net.Info("User is entering payment mode");
+
             return View();
         }
         public IActionResult Thanks()
         {
+            _log4net.Info("User is entering thank you page");
+
             return View();
         }
 
